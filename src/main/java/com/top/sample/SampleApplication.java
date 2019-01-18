@@ -29,7 +29,7 @@ public class SampleApplication {
     }
 
     @Bean
-    public LoadTimeWeaver loadTimeWeaver(){
+    public LoadTimeWeaver loadTimeWeaver() {
         return new InstrumentationLoadTimeWeaver();
     }
 }
