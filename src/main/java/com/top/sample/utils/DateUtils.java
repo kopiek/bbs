@@ -20,9 +20,9 @@ public class DateUtils {
 
     public static final String MONTH_DAY_FORMAT = "MM-dd";
 
-    private static final String DEFAULT_ZONE = "Aisa/Shanghai";
+    private static final String DEFAULT_ZONE = "Asia/Shanghai";
 
-    private static final ZoneId ZONE = ZoneId.of("DEFAULT_ZONE");
+    private static final ZoneId ZONE = ZoneId.of(DEFAULT_ZONE);
 
     /**
      * 判断sourceDate是否在targetDate后

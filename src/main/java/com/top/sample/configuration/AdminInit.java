@@ -33,6 +33,7 @@ public class AdminInit {
             exsitAdmin.setCreateTime(DateUtils.now());
             exsitAdmin.setModifyTime(DateUtils.now());
             exsitAdmin.setPassword(EncodingUtils.md5Encoding(password));
+            exsitAdmin.setStatus(1);
             userRepository.save(exsitAdmin);
         }
     }
