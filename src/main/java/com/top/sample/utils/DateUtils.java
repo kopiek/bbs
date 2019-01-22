@@ -59,6 +59,13 @@ public class DateUtils {
         return sourceDate.isAfter(targetDate);
     }
 
+    /**
+     * 判断日期相差多少天
+     *
+     * @param sourceDate
+     * @param targetDate
+     * @return
+     */
     public static int diffDay(String sourceDate, String targetDate) {
         return diffDay(getLocalDateTimeOfString(sourceDate), getLocalDateTimeOfString(targetDate));
     }
@@ -75,6 +82,13 @@ public class DateUtils {
         return Period.between(sourceDate.toLocalDate(), targetDate.toLocalDate()).getDays();
     }
 
+    /**
+     * 判断两个日期之间相差多少个月
+     *
+     * @param sourceDate
+     * @param targetDate
+     * @return
+     */
     public static int diffMonth(String sourceDate, String targetDate) {
         return diffMonth(getLocalDateTimeOfString(sourceDate), getLocalDateTimeOfString(targetDate));
     }
@@ -91,6 +105,13 @@ public class DateUtils {
         return Period.between(sourceDate.toLocalDate(), targetDate.toLocalDate()).getMonths();
     }
 
+    /**
+     * 判断日期之间相差多少年
+     *
+     * @param sourceDate
+     * @param targetDate
+     * @return
+     */
     public static int diffYear(String sourceDate, String targetDate) {
         return diffYear(getLocalDateTimeOfString(sourceDate), getLocalDateTimeOfString(targetDate));
     }
@@ -107,6 +128,13 @@ public class DateUtils {
         return Period.between(sourceDate.toLocalDate(), targetDate.toLocalDate()).getYears();
     }
 
+    /**
+     * 把一个日期加上一个日期得到新的日期
+     *
+     * @param date
+     * @param day
+     * @return
+     */
     public static Date addDay(String date, int day) {
         return addDay(getLocalDateTimeOfString(date), day);
     }
@@ -120,9 +148,16 @@ public class DateUtils {
     }
 
     public static Date addDay(LocalDateTime date, int day) {
-        return getDateFromLocalDate(date.toLocalDate().plusDays(day));
+        return getDateFromLocalDateTime(date.plusDays(day));
     }
 
+    /**
+     * 把一个日期加上几个月,得到新的日期
+     *
+     * @param date
+     * @param month
+     * @return
+     */
     public static Date addMonth(String date, int month) {
         return addMonth(getLocalDateTimeOfString(date), month);
     }
@@ -136,9 +171,16 @@ public class DateUtils {
     }
 
     public static Date addMonth(LocalDateTime date, int month) {
-        return getDateFromLocalDate(date.toLocalDate().plusMonths(month));
+        return getDateFromLocalDateTime(date.plusMonths(month));
     }
 
+    /**
+     * 把一个日期加上几年得到新的日期
+     *
+     * @param date
+     * @param year
+     * @return
+     */
     public static Date addYear(String date, int year) {
         return addYear(getLocalDateTimeOfString(date), year);
     }
@@ -152,22 +194,29 @@ public class DateUtils {
     }
 
     public static Date addYear(LocalDateTime date, int year) {
-        return getDateFromLocalDate(date.toLocalDate().plusYears(year));
+        return getDateFromLocalDateTime(date.plusYears(year));
     }
 
-    public static Date format(Long date,String formatStr) {
-        return format(getDateTimeOfTimestamp(date),formatStr);
+    /**
+     * 格式化日期
+     *
+     * @param date
+     * @param formatStr
+     * @return
+     */
+    public static Date format(Long date, String formatStr) {
+        return format(getDateTimeOfTimestamp(date), formatStr);
     }
 
-    public static Date format(Date date,String formatStr) {
-        return format(getLocalDateTimeFromDate(date),formatStr);
+    public static Date format(Date date, String formatStr) {
+        return format(getLocalDateTimeFromDate(date), formatStr);
     }
 
-    public static Date format(LocalDateTime date ,String formatStr) {
-        if (Objects.isNull(formatStr) || Objects.equals(formatStr,"")) {
+    public static Date format(LocalDateTime date, String formatStr) {
+        if (Objects.isNull(formatStr) || Objects.equals(formatStr, "")) {
             formatStr = DEFAULT_FORMAT;
         }
-        return getDateFromLocalDate(getLocalDateTimeOfString(date.format(DateTimeFormatter.ofPattern(formatStr))).toLocalDate());
+        return getDateFromLocalDateTime(getLocalDateTimeOfString(date.format(DateTimeFormatter.ofPattern(formatStr))));
     }
 
     public static Date now() {
@@ -175,30 +224,25 @@ public class DateUtils {
     }
 
     private static LocalDateTime getDateTimeOfTimestamp(Long timestamp) {
-        Objects.requireNonNull(timestamp,"timeStamp must not be null");
+        Objects.requireNonNull(timestamp, "timeStamp must not be null");
         Instant instant = Instant.ofEpochMilli(timestamp);
         return LocalDateTime.ofInstant(instant, ZONE);
     }
 
     private static LocalDateTime getLocalDateTimeFromDate(Date date) {
-        Objects.requireNonNull(date,"date must not be null");
+        Objects.requireNonNull(date, "date must not be null");
         Long timestamp = date.getTime();
         return getDateTimeOfTimestamp(timestamp);
     }
 
     private static LocalDateTime getLocalDateTimeOfString(String dateStr) {
-        Objects.requireNonNull(dateStr,"dateStr must not be null");
+        Objects.requireNonNull(dateStr, "dateStr must not be null");
         Instant instant = Instant.parse(dateStr);
         return LocalDateTime.ofInstant(instant, ZONE);
     }
 
-    private static Date getDateFromLocalDate(LocalDate localDate) {
-        Objects.requireNonNull(localDate,"localdate must not be null");
-        return Date.from(localDate.atStartOfDay(ZONE).toInstant());
-    }
-
     private static Date getDateFromLocalDateTime(LocalDateTime localDateTime) {
-        Objects.requireNonNull(localDateTime,"localDateTime must not be null");
+        Objects.requireNonNull(localDateTime, "localDateTime must not be null");
         return Date.from(localDateTime.atZone(ZONE).toInstant());
     }
 }
