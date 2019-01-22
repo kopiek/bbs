@@ -175,33 +175,25 @@ public class DateUtils {
     }
 
     private static LocalDateTime getDateTimeOfTimestamp(Long timestamp) {
-        if (Objects.isNull(timestamp)) {
-            throw new IllegalArgumentException("timeStamp must not be null");
-        }
+        Objects.requireNonNull(timestamp,"timeStamp must not be null");
         Instant instant = Instant.ofEpochMilli(timestamp);
         return LocalDateTime.ofInstant(instant, ZONE);
     }
 
     private static LocalDateTime getLocalDateTimeFromDate(Date date) {
-        if (Objects.isNull(date)) {
-            throw new IllegalArgumentException("date must not be null");
-        }
+        Objects.requireNonNull(date,"date must not be null");
         Long timestamp = date.getTime();
         return getDateTimeOfTimestamp(timestamp);
     }
 
     private static LocalDateTime getLocalDateTimeOfString(String dateStr) {
-        if (Objects.isNull(dateStr)) {
-            throw new IllegalArgumentException("dateStr must not be null");
-        }
+        Objects.requireNonNull(dateStr,"dateStr must not be null");
         Instant instant = Instant.parse(dateStr);
         return LocalDateTime.ofInstant(instant, ZONE);
     }
 
     private static Date getDateFromLocalDate(LocalDate localDate) {
-        if (Objects.isNull(localDate)) {
-            throw new IllegalArgumentException("localdate must not be null");
-        }
+        Objects.requireNonNull(localDate,"localdate must not be null");
         return Date.from(localDate.atStartOfDay(ZONE).toInstant());
     }
 
