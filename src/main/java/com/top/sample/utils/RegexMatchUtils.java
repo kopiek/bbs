@@ -72,11 +72,10 @@ public class RegexMatchUtils {
     }
 
     public static boolean checkIdentifyNo(String idCard) {
-        boolean antecedent = IDEATIFY_CARD_PATTERN.matcher(idCard).matches();
-        if (!antecedent) {
-            return false;
-        }
-        return isValidProvince(idCard.substring(0, 2)) && isValidDate(idCard.substring(6, 14)) && checkLastNum(idCard);
+        return IDEATIFY_CARD_PATTERN.matcher(idCard).matches() &&
+                isValidProvince(idCard.substring(0, 2)) &&
+                isValidDate(idCard.substring(6, 14)) &&
+                checkLastNum(idCard);
     }
 
     /**
