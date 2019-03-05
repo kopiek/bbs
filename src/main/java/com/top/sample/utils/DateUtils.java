@@ -20,6 +20,8 @@ public class DateUtils {
 
     public static final String MONTH_DAY_FORMAT = "MM-dd";
 
+    public static final String YEAR_FORMAT = "yyyy";
+
     private static final String DEFAULT_ZONE = "Asia/Shanghai";
 
     private static final ZoneId ZONE = ZoneId.of(DEFAULT_ZONE);
@@ -204,19 +206,19 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static Date format(Long date, String formatStr) {
+    public static String format(Long date, String formatStr) {
         return format(getDateTimeOfTimestamp(date), formatStr);
     }
 
-    public static Date format(Date date, String formatStr) {
+    public static String format(Date date, String formatStr) {
         return format(getLocalDateTimeFromDate(date), formatStr);
     }
 
-    public static Date format(LocalDateTime date, String formatStr) {
+    public static String format(LocalDateTime date, String formatStr) {
         if (Objects.isNull(formatStr) || Objects.equals(formatStr, "")) {
             formatStr = DEFAULT_FORMAT;
         }
-        return getDateFromLocalDateTime(getLocalDateTimeOfString(date.format(DateTimeFormatter.ofPattern(formatStr))));
+        return date.format(DateTimeFormatter.ofPattern(formatStr));
     }
 
     public static Date now() {
