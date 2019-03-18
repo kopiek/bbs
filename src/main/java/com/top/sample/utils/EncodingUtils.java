@@ -39,7 +39,7 @@ public class EncodingUtils {
     }
 
     private static String getStringFromByteArray(byte... charArray) {
-        Objects.requireNonNull(charArray, "chaArray must not be null");
+        Objects.requireNonNull(charArray, "charArray must not be null");
         StringBuilder stringBuilder = new StringBuilder();
         for (byte item : charArray) {
             stringBuilder.append(item);
